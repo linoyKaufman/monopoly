@@ -1,11 +1,11 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include "Space.h"
-#include "Property.h"
-#include "Railroad.h"
-#include "Utility.h"
-#include "SpecialSpace.h"
+#include "Space.hpp"
+#include "Property.hpp"
+#include "Railroad.hpp"
+#include "Utility.hpp"
+#include "SpecialSpace.hpp"
 
 using namespace std;
 
