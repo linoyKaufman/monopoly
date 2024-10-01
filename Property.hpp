@@ -4,7 +4,9 @@
 #include <iostream>
 #include <string>
 #include "Space.hpp"
-#include "Player.hpp"
+
+// Forward declaration of Player class
+class Player;
 
 using namespace std;
 
@@ -26,7 +28,7 @@ public:
     Property(string name, int price, int baseRent, int houseCost = 50, int hotelCost = 100);
 
     // Getter methods
-    string getName() const ;
+    string getName() const;
     int getPrice() const;
     int getRent() const;
     Player* getOwner() const;
@@ -38,7 +40,7 @@ public:
     void buyHotel();
 
     // Override landOn method from Space
-    void landOn(Player* player) override;
+    void landOn(Player* player) ;
 
     // Utility methods
     void displayPropertyInfo() const;

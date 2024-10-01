@@ -46,10 +46,10 @@ void Utility::landOn(Player* player) {
     } else if (owner == player) {
         cout << player->getName() << " landed on their own utility." << endl;
     } else {
-        int diceRoll = rand() % 6 + 1 + rand() % 6 + 1;  // Simulate rolling two dice
-        int rent = getRent(diceRoll, owner->getNumberOfUtilities());  // Assume Player class has this method
-        player->deductMoney(rent);
-        owner->addMoney(rent);
-        cout << player->getName() << " rolled a " << diceRoll << " and paid $" << rent << " to " << owner->getName() << " for landing on " << name << "." << endl;
+        // int diceRoll = rand() % 6 + 1 + rand() % 6 + 1;  // Simulate rolling two dice
+        // int rent = getRent(diceRoll, owner->getNumberOfUtilities());  // Assume Player class has this method
+        // player->deductMoney(rent);
+        // owner->addMoney(rent);
+        // cout << player->getName() << " rolled a " << diceRoll << " and paid $" << rent << " to " << owner->getName() << " for landing on " << name << "." << endl;
     }
 }

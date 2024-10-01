@@ -3,14 +3,14 @@
 
 #include <vector>
 #include <string>
-#include "Space.hpp"
-#include "Player.hpp"
+#include "Space.hpp"  // Include Space header to use Space* pointers
 
 // Forward declarations for Property, Railroad, Utility, SpecialSpace
 class Property;
 class Railroad;
 class Utility;
 class SpecialSpace;
+class Space;
 
 class Board {
 private:

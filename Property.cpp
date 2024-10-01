@@ -1,4 +1,7 @@
 #include "Property.hpp"
+#include "Player.hpp"
+#include "Space.hpp"
+#include "Board.hpp"
 
 // Constructor - Initializes the property with its name, price, rent, and building costs
 Property::Property(string name, int price, int baseRent, int houseCost, int hotelCost)

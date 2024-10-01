@@ -1,3 +1,5 @@
+#ifndef PLAYER_HPP
+#define PLAYER_HPP
 
 #include <iostream>
 #include <vector>
@@ -5,6 +7,8 @@
 #include "Property.hpp"
 
 using namespace std;
+
+class Property;
 
 class Player {
 private:
@@ -55,12 +59,10 @@ public:
     // Pay the fine to get out of jail
     void payJailFine();
 
-    // Get the number of utilities owned by the player
-    int getNumberOfUtilities() const;
-
     // Display the list of properties owned by the player
     void displayProperties() const;
 
     // Check if the player has enough money to continue in the game
     bool isBankrupt() const;
 };
+#endif

@@ -1,8 +1,12 @@
+
+
+
 #include <iostream>
 #include <vector>
 #include <string>
 #include "Property.hpp" 
 #include "Utility.hpp"
+#include "Player.hpp"
 
 using namespace std;
 
@@ -85,11 +89,6 @@ public:
         } else {
             cout << name << " doesn't have enough money to buy " << utility->getName() << endl;
         }
-    }
-
-    // Get the number of utilities owned by the player
-    int getNumberOfUtilities() const {
-        return utilities.size();  // Return the size of the utilities vector
     }
 
     // Display the list of properties owned by the player

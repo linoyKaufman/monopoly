@@ -1,5 +1,5 @@
 // Cube.hpp
-#pragma once
+
 
 class Cube {
 public:

@@ -1,9 +1,16 @@
+#ifndef SPACE_HPP  // If SPACE_HPP is not defined
+#define SPACE_HPP  // Define SPACE_HPP
+
 
 #include <string>
 #include "Player.hpp"
+#include "Property.hpp"
+#include "Board.hpp"
+
+class Player;
 
 class Space {
-protected:
+private:
     std::string name;
 
 public:
@@ -21,3 +28,4 @@ public:
     // Virtual destructor
     virtual ~Space() {}
 };
+#endif // SPACE_HPP
