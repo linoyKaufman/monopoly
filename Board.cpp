@@ -5,6 +5,7 @@
 #include "Property.hpp"
 #include "Railroad.hpp"
 #include "Utility.hpp"
+#include "Board.hpp"
 #include "SpecialSpace.hpp"
 
 using namespace std;

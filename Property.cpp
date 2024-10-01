@@ -1,8 +1,7 @@
 #include "Property.hpp"
 
 // Constructor - Initializes the property with its name, price, rent, and building costs
-Property::Property(string name, int price, int baseRent, int houseCost, int hotelCost)
-    : name(name), price(price), baseRent(baseRent), houseCost(houseCost), hotelCost(hotelCost), owner(nullptr), houses(0), hotel(false) {
+Property::Property(string name, int price, int baseRent, int houseCost, int hotelCost){
     // Rent with houses (arbitrary example values, can be adjusted)
     rentWithHouse[0] = baseRent * 5;   // Rent with 1 house
     rentWithHouse[1] = baseRent * 15;  // Rent with 2 houses
