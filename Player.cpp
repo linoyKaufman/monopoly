@@ -2,6 +2,7 @@
 #include <vector>
 #include <string>
 #include "Property.hpp" 
+#include "Utility.hpp"
 
 using namespace std;
 
@@ -13,6 +14,7 @@ private:
     bool inJail;                   // Flag indicating if the player is in jail
     int jailTurns;                 // Number of turns the player has been in jail
     vector<Property*> properties;  // List of properties the player owns
+    vector<Utility*> utilities;    // List of utilities the player owns <--- ADD THIS
 
 public:
     // Constructor - Initializes a new player with a name, starting money, and position
@@ -73,47 +75,21 @@ public:
         }
     }
 
-    // Pay rent to another player (assuming the property is owned by someone else)
-    void payRent(Property* property) {
-        Player* owner = property->getOwner();
-        int rent = property->getRent();
-        if (owner != this) {
-            deductMoney(rent);
-            owner->addMoney(rent);
-            cout << name << " paid " << rent << " in rent to " << owner->getName() << endl;
-        }
-    }
-
-    // Go to jail (sets inJail flag and moves the player to the jail position)
-    void goToJail() {
-        inJail = true;
-        position = 10;  // Jail is typically at position 10 on the board
-        jailTurns = 0;  // Reset jail turn counter
-        cout << name << " has been sent to jail!" << endl;
-    }
-
-    // Try to leave jail (e.g., by paying, rolling doubles, etc.)
-    void attemptToLeaveJail() {
-        if (jailTurns < 3) {
-            jailTurns++;
-            cout << name << " is still in jail for " << jailTurns << " turns." << endl;
+    // Buy a utility and add it to the player's list of owned utilities
+    void buyUtility(Utility* utility) {
+        if (money >= utility->getPrice()) {
+            money -= utility->getPrice();
+            utilities.push_back(utility);
+            utility->setOwner(this);
+            cout << name << " bought the utility: " << utility->getName() << endl;
         } else {
-            payJailFine();
-            inJail = false;
-            cout << name << " has paid the fine and left jail." << endl;
+            cout << name << " doesn't have enough money to buy " << utility->getName() << endl;
         }
     }
 
-    // Pay the fine to get out of jail
-    void payJailFine() {
-        if (money >= 50) {
-            deductMoney(50);  // Jail fine is typically 50 units
-            inJail = false;
-            jailTurns = 0;
-            cout << name << " paid the jail fine and is now free." << endl;
-        } else {
-            cout << name << " cannot afford the jail fine!" << endl;
-        }
+    // Get the number of utilities owned by the player
+    int getNumberOfUtilities() const {
+        return utilities.size();  // Return the size of the utilities vector
     }
 
     // Display the list of properties owned by the player
@@ -124,6 +100,18 @@ public:
             cout << name << " owns the following properties:" << endl;
             for (auto* property : properties) {
                 cout << " - " << property->getName() << endl;
+            }
+        }
+    }
+
+    // Display the list of utilities owned by the player
+    void displayUtilities() const {
+        if (utilities.empty()) {
+            cout << name << " owns no utilities." << endl;
+        } else {
+            cout << name << " owns the following utilities:" << endl;
+            for (auto* utility : utilities) {
+                cout << " - " << utility->getName() << endl;
             }
         }
     }

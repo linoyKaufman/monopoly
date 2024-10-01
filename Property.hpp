@@ -26,7 +26,7 @@ public:
     Property(string name, int price, int baseRent, int houseCost = 50, int hotelCost = 100);
 
     // Getter methods
-    string getName() const override;
+    string getName() const ;
     int getPrice() const;
     int getRent() const;
     Player* getOwner() const;
