@@ -1,19 +1,12 @@
 #include "Property.hpp"
-#include "Player.hpp"
-#include "Space.hpp"
-#include "Board.hpp"
+#include <iostream>
 
-// Constructor - Initializes the property with its name, price, rent, and building costs
+using namespace std;
+
+// Constructor for Property
 Property::Property(string name, int price, int baseRent, int houseCost, int hotelCost)
-    : Space(name),  // Call the Space constructor here with the property name
-      price(price), 
-      baseRent(baseRent), 
-      houseCost(houseCost), 
-      hotelCost(hotelCost), 
-      owner(nullptr), 
-      houses(0), 
-      hotel(false) {
-    // Rent with houses (arbitrary example values, can be adjusted)
+    : Space(name), price(price), baseRent(baseRent), houseCost(houseCost), hotelCost(hotelCost), owner(nullptr), houses(0), hotel(false) {
+    // Initialize rent with houses
     rentWithHouse[0] = baseRent * 5;   // Rent with 1 house
     rentWithHouse[1] = baseRent * 15;  // Rent with 2 houses
     rentWithHouse[2] = baseRent * 30;  // Rent with 3 houses
@@ -21,8 +14,7 @@ Property::Property(string name, int price, int baseRent, int houseCost, int hote
     rentWithHotel = baseRent * 100;    // Rent with a hotel
 }
 
-
-// Getter for the property name
+// Getter for the property name (overrides the Space's getName)
 string Property::getName() const {
     return name;
 }
@@ -35,9 +27,9 @@ int Property::getPrice() const {
 // Getter for the rent - depends on the number of houses/hotel built
 int Property::getRent() const {
     if (hotel) {
-        return rentWithHotel;
+        return rentWithHotel;  // Rent with a hotel
     } else if (houses > 0) {
-        return rentWithHouse[houses - 1];  // Rent based on the number of houses
+        return rentWithHouse[houses - 1];  // Rent with houses
     } else {
         return baseRent;  // Base rent if no houses/hotels
     }
@@ -85,18 +77,18 @@ void Property::landOn(Player* player) {
         if (player != owner) {
             // If the property is owned by another player, pay rent
             int rent = getRent();
-            cout << player->getName() << " landed on " << name << " owned by " << owner->getName() << ". Rent is " << rent << "." << endl;
-            player->deductMoney(rent);
-            owner->addMoney(rent);
+            cout << player->getName() << " landed on " << name << " owned by " << owner->getName() << ". Rent is $" << rent << "." << endl;
+            player->deductMoney(rent);  // Deduct rent from the player landing on the property
+            owner->addMoney(rent);      // Give rent to the owner
         } else {
             cout << player->getName() << " landed on their own property: " << name << "." << endl;
         }
     } else {
         // If the property is unowned, offer the player a chance to buy it
-        cout << player->getName() << " landed on " << name << ". It costs " << price << "." << endl;
+        cout << player->getName() << " landed on " << name << ". It's available for purchase for $" << price << "." << endl;
         if (player->getMoney() >= price) {
             char decision;
-            cout << "Do you want to buy " << name << " for " << price << "? (y/n): ";
+            cout << "Do you want to buy " << name << " for $" << price << "? (y/n): ";
             cin >> decision;
             if (decision == 'y') {
                 player->buyProperty(this);  // Player buys the property
@@ -110,8 +102,8 @@ void Property::landOn(Player* player) {
 // Display the information of the property (name, price, rent, houses, and owner)
 void Property::displayPropertyInfo() const {
     cout << "Property: " << name << endl;
-    cout << "Price: " << price << endl;
-    cout << "Base Rent: " << baseRent << endl;
+    cout << "Price: $" << price << endl;
+    cout << "Base Rent: $" << baseRent << endl;
     cout << "Houses: " << houses << endl;
     cout << "Hotel: " << (hotel ? "Yes" : "No") << endl;
     if (owner != nullptr) {

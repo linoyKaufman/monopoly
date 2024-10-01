@@ -1,17 +1,15 @@
-#ifndef SPACE_HPP  // If SPACE_HPP is not defined
-#define SPACE_HPP  // Define SPACE_HPP
-
+#ifndef SPACE_HPP
+#define SPACE_HPP
 
 #include <string>
-#include "Player.hpp"
-#include "Property.hpp"
-#include "Board.hpp"
 
+// Forward declaration of Player class
 class Player;
 
+// Base class for all board spaces
 class Space {
-private:
-    std::string name;
+protected:
+    std::string name;  // Protected, so derived classes can access this member
 
 public:
     // Constructor that initializes the name of the space
@@ -28,4 +26,5 @@ public:
     // Virtual destructor
     virtual ~Space() {}
 };
-#endif // SPACE_HPP
+
+#endif

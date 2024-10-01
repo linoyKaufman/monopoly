@@ -1,18 +1,14 @@
-#ifndef PROPERTY_H
-#define PROPERTY_H
+#ifndef PROPERTY_HPP
+#define PROPERTY_HPP
 
-#include <iostream>
-#include <string>
 #include "Space.hpp"
+#include <string>
 
 // Forward declaration of Player class
 class Player;
 
-using namespace std;
-
 class Property : public Space {
 private:
-    string name;           // Property name
     int price;             // Purchase price of the property
     int baseRent;          // Base rent without any houses or hotels
     int houseCost;         // Cost of building a house on this property
@@ -25,10 +21,10 @@ private:
 
 public:
     // Constructor
-    Property(string name, int price, int baseRent, int houseCost = 50, int hotelCost = 100);
+    Property(std::string name, int price, int baseRent, int houseCost = 50, int hotelCost = 100);
 
     // Getter methods
-    string getName() const;
+    std::string getName() const ;
     int getPrice() const;
     int getRent() const;
     Player* getOwner() const;
