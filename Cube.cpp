@@ -5,7 +5,7 @@
 
 // Constructor - Optionally initialize random seed once 
 Cube::Cube() {
-    std::srand(std::time(0));  // Use current time as the seed for random generator queen linoy
+    std::srand(std::time(0));  // Use current time as the seed for random generator 
 }
 
 // Roll two six-sided dice and return the total
