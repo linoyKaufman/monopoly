@@ -1,123 +1,122 @@
-// Player.cpp
-#include "Player.hpp"
-#include "Property.hpp"
+
+
+
 #include <iostream>
+#include <vector>
+#include <string>
+#include "Property.hpp" 
+#include "Utility.hpp"
+#include "Player.hpp"
 
-// Constructor - Initializes a new player with a name, starting money, and position
-Player::Player(string playerName) 
-    : name(playerName), money(1500), position(0), inJail(false), jailTurns(0) {}
+using namespace std;
 
-// Get the player's name
-string Player::getName() const {
-    return name;
-}
+class Player {
+private:
+    string name;                   // The name of the player
+    int money;                     // The amount of money the player has
+    int position;                  // The player's position on the board (0 to 39)
+    bool inJail;                   // Flag indicating if the player is in jail
+    int jailTurns;                 // Number of turns the player has been in jail
+    vector<Property*> properties;  // List of properties the player owns
+    vector<Utility*> utilities;    // List of utilities the player owns <--- ADD THIS
 
-// Get the player's position on the board
-int Player::getPosition() const {
-    return position;
-}
+public:
+    // Constructor - Initializes a new player with a name, starting money, and position
+    Player(string playerName) : name(playerName), money(1500), position(0), inJail(false), jailTurns(0) {}
 
-// Get the amount of money the player currently has
-int Player::getMoney() const {
-    return money;
-}
-
-// Check if the player is in jail
-bool Player::isInJail() const {
-    return inJail;
-}
-
-// Move the player by a specified number of steps (wrap around the board if necessary)
-void Player::move(int steps) {
-    position = (position + steps) % 40; // Ensure position stays within 0 to 39 (circular board)
-    std::cout << name << " moved to position " << position << std::endl;
-}
-
-// Deduct money from the player (used for paying rent, taxes, etc.)
-void Player::deductMoney(int amount) {
-    if (money >= amount) {
-        money -= amount;
-        std::cout << name << " has paid " << amount << " and now has " << money << " left." << std::endl;
-    } else {
-        std::cout << name << " doesn't have enough money!" << std::endl;
-        // Handle bankruptcy or other game rules if needed
+    // Get the player's name
+    string getName() const {
+        return name;
     }
-}
 
-// Add money to the player (used for collecting rent, passing GO, etc.)
-void Player::addMoney(int amount) {
-    money += amount;
-    std::cout << name << " received " << amount << " and now has " << money << std::endl;
-}
-
-// Buy a property (if affordable), and add it to the player's list of owned properties
-void Player::buyProperty(Property* property) {
-    if (money >= property->getPrice()) {
-        money -= property->getPrice();
-        properties.push_back(property);
-        property->setOwner(this);
-        std::cout << name << " bought " << property->getName() << " for " << property->getPrice() << std::endl;
-    } else {
-        std::cout << name << " doesn't have enough money to buy " << property->getName() << std::endl;
+    // Get the player's position on the board
+    int getPosition() const {
+        return position;
     }
-}
 
-// Pay rent to another player (assuming the property is owned by someone else)
-void Player::payRent(Property* property) {
-    Player* owner = property->getOwner();
-    if (owner != this) {
-        int rent = property->getRent();
-        deductMoney(rent);
-        owner->addMoney(rent);
-        std::cout << name << " paid " << rent << " in rent to " << owner->getName() << std::endl;
+    // Get the amount of money the player currently has
+    int getMoney() const {
+        return money;
     }
-}
 
-// Go to jail (sets inJail flag and moves the player to the jail position)
-void Player::goToJail() {
-    inJail = true;
-    position = 10;  // Jail is typically at position 10 on the board
-    jailTurns = 0;  // Reset jail turn counter
-    std::cout << name << " has been sent to jail!" << std::endl;
-}
-
-// Try to leave jail (e.g., by paying, rolling doubles, etc.)
-void Player::attemptToLeaveJail() {
-    if (jailTurns < 3) {
-        jailTurns++;
-        std::cout << name << " is still in jail for " << jailTurns << " turns." << std::endl;
-    } else {
-        payJailFine();
-        inJail = false;
-        std::cout << name << " has paid the fine and left jail." << std::endl;
+    // Check if the player is in jail
+    bool isInJail() const {
+        return inJail;
     }
-}
 
-// Pay the fine to get out of jail
-void Player::payJailFine() {
-    if (money >= 50) {
-        deductMoney(50);  // Jail fine is typically 50 units
-        inJail = false;
-        jailTurns = 0;
-        std::cout << name << " paid the jail fine and is now free." << std::endl;
-    } else {
-        std::cout << name << " cannot afford the jail fine!" << std::endl;
+    // Move the player by a specified number of steps (wrap around the board if necessary)
+    void move(int steps) {
+        position = (position + steps) % 40; // Ensure position stays within 0 to 39 (circular board)
+        cout << name << " moved to position " << position << endl;
     }
-}
 
-// Display the list of properties owned by the player
-void Player::displayProperties() const {
-    if (properties.empty()) {
-        std::cout << name << " owns no properties." << std::endl;
-    } else {
-        std::cout << name << " owns the following properties:" << std::endl;
-        for (auto* property : properties) {
-            std::cout << " - " << property->getName() << std::endl;
+    // Deduct money from the player (used for paying rent, taxes, etc.)
+    void deductMoney(int amount) {
+        if (money >= amount) {
+            money -= amount;
+            cout << name << " has paid " << amount << " and now has " << money << " left." << endl;
+        } else {
+            cout << name << " doesn't have enough money!" << endl;
+            // Handle bankruptcy or other game rules if needed
         }
     }
-}
 
-// Check if the player has enough money to continue in the game
-bool Player::isBankrupt() const {
-    return money <= 0;
-}
+    // Add money to the player (used for collecting rent, passing GO, etc.)
+    void addMoney(int amount) {
+        money += amount;
+        cout << name << " received " << amount << " and now has " << money << endl;
+    }
+
+    // Buy a property (if affordable), and add it to the player's list of owned properties
+    void buyProperty(Property* property) {
+        if (money >= property->getPrice()) {
+            money -= property->getPrice();
+            properties.push_back(property);
+            property->setOwner(this);
+            cout << name << " bought " << property->getName() << " for " << property->getPrice() << endl;
+        } else {
+            cout << name << " doesn't have enough money to buy " << property->getName() << endl;
+        }
+    }
+
+    // Buy a utility and add it to the player's list of owned utilities
+    void buyUtility(Utility* utility) {
+        if (money >= utility->getPrice()) {
+            money -= utility->getPrice();
+            utilities.push_back(utility);
+            utility->setOwner(this);
+            cout << name << " bought the utility: " << utility->getName() << endl;
+        } else {
+            cout << name << " doesn't have enough money to buy " << utility->getName() << endl;
+        }
+    }
+
+    // Display the list of properties owned by the player
+    void displayProperties() const {
+        if (properties.empty()) {
+            cout << name << " owns no properties." << endl;
+        } else {
+            cout << name << " owns the following properties:" << endl;
+            for (auto* property : properties) {
+                cout << " - " << property->getName() << endl;
+            }
+        }
+    }
+
+    // Display the list of utilities owned by the player
+    void displayUtilities() const {
+        if (utilities.empty()) {
+            cout << name << " owns no utilities." << endl;
+        } else {
+            cout << name << " owns the following utilities:" << endl;
+            for (auto* utility : utilities) {
+                cout << " - " << utility->getName() << endl;
+            }
+        }
+    }
+
+    // Check if the player has enough money to continue in the game
+    bool isBankrupt() const {
+        return money <= 0;
+    }
+};
