@@ -1,19 +1,29 @@
-# The name of the final executable
+# The name of the final executable for the main game
 TARGET = monopoly
+
+# The name of the test executable
+TEST_TARGET = test_game
 
 # Compiler and compiler flags
 CXX = g++
 CXXFLAGS = -Wall -std=c++11
 
-# Object files
+# Object files for the main game
 OBJS = Board.o Player.o Cube.o Property.o Railroad.o Utility.o SpecialSpace.o main.o
+
+# Object files for the test
+TEST_OBJS = Board.o Player.o Cube.o Property.o Railroad.o Utility.o SpecialSpace.o test_game.o
 
 # The default target, build the executable
 all: $(TARGET)
 
-# Linking the object files to create the executable
+# Linking the object files to create the executable for the main game
 $(TARGET): $(OBJS)
 	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS)
+
+# Linking the object files to create the executable for the test
+$(TEST_TARGET): $(TEST_OBJS)
+	$(CXX) $(CXXFLAGS) -o $(TEST_TARGET) $(TEST_OBJS)
 
 # Compile individual source files into object files
 Board.o: Board.cpp Board.hpp
@@ -40,6 +50,10 @@ SpecialSpace.o: SpecialSpace.cpp SpecialSpace.hpp
 main.o: main.cpp
 	$(CXX) $(CXXFLAGS) -c main.cpp
 
+# Compile the test game source file into an object file
+test_game.o: test_game.cpp
+	$(CXX) $(CXXFLAGS) -c test_game.cpp
+
 # Clean the build (remove object files and the executable)
 clean:
-	rm -f $(OBJS) $(TARGET) *.o
+	rm -f $(OBJS) $(TEST_OBJS) $(TARGET) $(TEST_TARGET) *.o
