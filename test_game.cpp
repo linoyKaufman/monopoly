@@ -1,3 +1,4 @@
+//kaufmanlinoy@gmail.com / 206971962
 #include "Board.hpp"
 #include "Player.hpp"
 #include "Cube.hpp"

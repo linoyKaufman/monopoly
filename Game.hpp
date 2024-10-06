@@ -1,3 +1,4 @@
+//kaufmanlinoy@gmail.com / 206971962
 #ifndef GAME_HPP
 #define GAME_HPP
 

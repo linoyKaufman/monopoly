@@ -1,3 +1,4 @@
+// kaufmanlinoy@gmail.com / 206971962
 #ifndef SPECIALSPACE_HPP
 #define SPECIALSPACE_HPP
 
@@ -10,8 +11,14 @@ public:
     // Constructor to initialize the special space with its name
     SpecialSpace(const std::string& name);
 
-    // Override the landOn method to define behavior when a player lands on the special space
+    // Override the landOn method to when a player lands on the special space
     void landOn(Player* player) override;
+
+    // Handle Community Chest space
+    void handleCommunityChest(Player* player);
+
+    // Handle Chance space
+    void handleChance(Player* player);
 };
 
 #endif // SPECIALSPACE_HPP

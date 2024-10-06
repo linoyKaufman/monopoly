@@ -1,13 +1,13 @@
-// Player.cpp
+//kaufmanlinoy@gmail.com / 206971962
 #include "Player.hpp"
 #include "Property.hpp"
 #include <iostream>
 
-// Constructor - Initializes a new player with a name, starting money, and position
+// Constructor 
 Player::Player(string playerName) 
     : name(playerName), money(1500), position(0), inJail(false), jailTurns(0) {}
 
-// Get the player's name
+
 string Player::getName() const {
     return name;
 }
@@ -27,30 +27,30 @@ bool Player::isInJail() const {
     return inJail;
 }
 
-// Move the player by a specified number of steps (wrap around the board if necessary)
+// Move the player by a specified number of steps 
 void Player::move(int steps) {
-    position = (position + steps) % 40; // Ensure position stays within 0 to 39 (circular board)
+    position = (position + steps) % 40; // Ensure position stays within 0 to 39 (the board is 40 length)
     std::cout << name << " moved to position " << position << std::endl;
 }
 
-// Deduct money from the player (used for paying rent, taxes, etc.)
+// Deduct money from the player 
 void Player::deductMoney(int amount) {
     if (money >= amount) {
         money -= amount;
         std::cout << name << " has paid " << amount << " and now has " << money << " left." << std::endl;
     } else {
         std::cout << name << " doesn't have enough money!" << std::endl;
-        // Handle bankruptcy or other game rules if needed
+        
     }
 }
 
-// Add money to the player (used for collecting rent, passing GO, etc.)
+// Add money to the player
 void Player::addMoney(int amount) {
     money += amount;
     std::cout << name << " received " << amount << " and now has " << money << std::endl;
 }
 
-// Buy a property (if affordable), and add it to the player's list of owned properties
+// Buy a property, and add it to the player's list of properties
 void Player::buyProperty(Property* property) {
     if (money >= property->getPrice()) {
         money -= property->getPrice();
@@ -62,7 +62,7 @@ void Player::buyProperty(Property* property) {
     }
 }
 
-// Pay rent to another player (assuming the property is owned by someone else)
+// Pay rent to another player 
 void Player::payRent(Property* property) {
     Player* owner = property->getOwner();
     if (owner != this) {
@@ -73,7 +73,7 @@ void Player::payRent(Property* property) {
     }
 }
 
-// Go to jail (sets inJail flag and moves the player to the jail position)
+// Go to jail 
 void Player::goToJail() {
     inJail = true;
     position = 10;  // Jail is typically at position 10 on the board
@@ -81,7 +81,7 @@ void Player::goToJail() {
     std::cout << name << " has been sent to jail!" << std::endl;
 }
 
-// Try to leave jail (e.g., by paying, rolling doubles, etc.)
+// Try to leave jail 
 void Player::attemptToLeaveJail() {
     if (jailTurns < 3) {
         jailTurns++;
@@ -93,10 +93,10 @@ void Player::attemptToLeaveJail() {
     }
 }
 
-// Pay the fine to get out of jail
+// Pay to get out of jail
 void Player::payJailFine() {
     if (money >= 50) {
-        deductMoney(50);  // Jail fine is typically 50 units
+        deductMoney(50); 
         inJail = false;
         jailTurns = 0;
         std::cout << name << " paid the jail fine and is now free." << std::endl;

@@ -1,3 +1,5 @@
+//kaufmanlinoy@gmail.com / 206971962
+
 #ifndef PLAYER_HPP
 #define PLAYER_HPP
 
@@ -20,7 +22,7 @@ private:
     vector<Property*> properties;  // List of properties the player owns
 
 public:
-    // Constructor - Initializes a new player with a name, starting money, and position
+    // Constructor 
     Player(string playerName);
 
     // Get the player's name
@@ -35,28 +37,28 @@ public:
     // Check if the player is in jail
     bool isInJail() const;
 
-    // Move the player by a specified number of steps (wrap around the board if necessary)
+    // Move the player by a specified number of steps
     void move(int steps);
 
-    // Deduct money from the player (used for paying rent, taxes, etc.)
+    // Deduct money from the player 
     void deductMoney(int amount);
 
-    // Add money to the player (used for collecting rent, passing GO, etc.)
+    // Add money to the player 
     void addMoney(int amount);
 
-    // Buy a property (if affordable), and add it to the player's list of owned properties
+    // Buy a property, and add it to the player's list of owned properties
     void buyProperty(Property* property);
 
-    // Pay rent to another player (assuming the property is owned by someone else)
+    // Pay rent to another player 
     void payRent(Property* property);
 
-    // Go to jail (sets inJail flag and moves the player to the jail position)
+    // Go to jail 
     void goToJail();
 
-    // Try to leave jail (e.g., by paying, rolling doubles, etc.)
+    // Try to leave jail 
     void attemptToLeaveJail();
 
-    // Pay the fine to get out of jail
+    // Pay to get out of jail
     void payJailFine();
 
     // Display the list of properties owned by the player
@@ -65,4 +67,4 @@ public:
     // Check if the player has enough money to continue in the game
     bool isBankrupt() const;
 };
-#endif
+#endif  

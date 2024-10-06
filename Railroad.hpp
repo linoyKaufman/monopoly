@@ -1,3 +1,5 @@
+//kaufmanlinoy@gmail.com / 206971962
+
 #ifndef RAILROAD_HPP
 #define RAILROAD_HPP
 
@@ -30,7 +32,8 @@ public:
     Player* getOwner() const;
 
     // What happens when a player lands on this railroad
-    void landOn(Player* player) override;  // Ensure override keyword is used
+    void landOn(Player* player) ;  
 };
 
-#endif  // RAILROAD_HPP
+
+#endif  

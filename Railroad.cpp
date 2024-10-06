@@ -1,3 +1,5 @@
+//kaufmanlinoy@gmail.com / 206971962
+
 #include "Railroad.hpp"
 #include "Property.hpp"
 #include "Player.hpp"
@@ -7,9 +9,8 @@
 
 using namespace std;
 
-// Constructor - Initialize the railroad and call the Space constructor
-Railroad::Railroad(std::string name, int price)
-    : Space(name), price(price), owner(nullptr) {
+// Constructor 
+Railroad::Railroad(std::string name, int price) : Space(name), price(price), owner(nullptr) {
     
 }
 
@@ -48,10 +49,5 @@ void Railroad::landOn(Player* player) {
         // Add logic to offer the player the option to buy the railroad
     } else if (owner == player) {
         cout << player->getName() << " landed on their own railroad." << endl;
-    } else {
-        //  int rent = getRent(owner->getNumberOfRailroads());
-        //  player->deductMoney(rent);  // Deduct rent from the player landing on the railroad
-        //  owner->addMoney(rent);      // Give the rent to the owner
-        //  cout << player->getName() << " paid $" << rent << " to " << owner->getName() << " for landing on " << name << "." << endl;
-    }
+    } 
 }

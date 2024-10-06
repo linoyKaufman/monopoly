@@ -1,3 +1,5 @@
+//kaufmanlinoy@gmail.com / 206971962
+
 #ifndef PROPERTY_HPP
 #define PROPERTY_HPP
 
@@ -35,11 +37,12 @@ public:
     void buyHouse();
     void buyHotel();
 
-    // Override landOn method from Space
+    // landOn method from Space
     void landOn(Player* player) ;
 
     // Utility methods
     void displayPropertyInfo() const;
 };
 
-#endif
+
+#endif  

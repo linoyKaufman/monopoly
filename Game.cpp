@@ -1,6 +1,8 @@
+//kaufmanlinoy@gmail.com / 206971962
+
 #include "Game.hpp"
 #include <iostream>
-#include <cstdlib>  // For rand() in dice roll
+#include <cstdlib>  // For random
 
 using namespace std;
 
@@ -18,7 +20,7 @@ Game::Game(int numPlayers) : currentPlayerIndex(0), gameOver(false) {
     cout << "Game initialized with " << numPlayers << " players." << endl;
 }
 
-// Destructor: Clean up dynamically allocated players
+// Destructor: deled players
 Game::~Game() {
     for (Player* player : players) {
         delete player;
@@ -59,7 +61,7 @@ void Game::movePlayer(Player* player, int steps) {
     handleLanding(player);  // Handle what happens when they land on a space
 }
 
-// Handle player landing on a space (e.g., buying property, paying rent)
+// Handle player landing on a space 
 void Game::handleLanding(Player* player) {
     int position = player->getPosition();
     Space* space = gameBoard.getSpace(position);
@@ -85,7 +87,7 @@ void Game::handlePlayerTurn(Player* player) {
     // Check if the player is bankrupt
     if (player->isBankrupt()) {
         cout << player->getName() << " is bankrupt and out of the game." << endl;
-        // Logic to remove bankrupt players from the game
+        // remove bankrupt players from the game
     }
 }
 

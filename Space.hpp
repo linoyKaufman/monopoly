@@ -1,18 +1,20 @@
+//kaufmanlinoy@gmail.com / 206971962
+
 #ifndef SPACE_HPP
 #define SPACE_HPP
 
 #include <string>
 
-// Forward declaration of Player class
+
 class Player;
 
-// Base class for all board spaces
+//  class for all board spaces
 class Space {
 protected:
-    std::string name;  // Protected, so derived classes can access this member
+    std::string name;  
 
 public:
-    // Constructor that initializes the name of the space
+    // Constructor
     Space(const std::string& spaceName) : name(spaceName) {}
 
     // Virtual function for when a player lands on the space

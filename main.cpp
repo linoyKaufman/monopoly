@@ -1,3 +1,4 @@
+//kaufmanlinoy@gmail.com / 206971962
 #include "Board.hpp"
 #include "Player.hpp"
 #include "Cube.hpp"
@@ -6,11 +7,11 @@
 using namespace std;
 
 int main() {
-    // Initialize the game board and cube (for dice rolling)
+    
     Board board;
     Cube cube;
 
-    // Create two players for the game
+    
     Player player1("Alice");
     Player player2("Bob");
 

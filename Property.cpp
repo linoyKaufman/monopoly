@@ -1,3 +1,5 @@
+//kaufmanlinoy@gmail.com / 206971962
+
 #include "Property.hpp"
 #include <iostream>
 #include "Player.hpp"
@@ -5,7 +7,7 @@
 
 using namespace std;
 
-// Constructor for Property
+// Constructor 
 Property::Property(string name, int price, int baseRent, int houseCost, int hotelCost)
     : Space(name), price(price), baseRent(baseRent), houseCost(houseCost), hotelCost(hotelCost), owner(nullptr), houses(0), hotel(false) {
     // Initialize rent with houses
@@ -16,17 +18,17 @@ Property::Property(string name, int price, int baseRent, int houseCost, int hote
     rentWithHotel = baseRent * 100;    // Rent with a hotel
 }
 
-// Getter for the property name (overrides the Space's getName)
+// Getter for the property name 
 string Property::getName() const {
     return name;
 }
 
-// Getter for the purchase price of the property
+// Getter for the price of the property
 int Property::getPrice() const {
     return price;
 }
 
-// Getter for the rent - depends on the number of houses/hotel built
+// Getter for the rent 
 int Property::getRent() const {
     if (hotel) {
         return rentWithHotel;  // Rent with a hotel
@@ -62,7 +64,7 @@ void Property::buyHouse() {
     }
 }
 
-// Buy a hotel on the property (only allowed if there are 4 houses)
+// Buy a hotel on the property 
 void Property::buyHotel() {
     if (houses == 4 && !hotel) {
         hotel = true;
@@ -73,7 +75,7 @@ void Property::buyHotel() {
     }
 }
 
-// Override the landOn method from Space - handles what happens when a player lands on this property
+// the landOn method from Space
 void Property::landOn(Player* player) {
     if (isOwned()) {
         if (player != owner) {
@@ -101,7 +103,7 @@ void Property::landOn(Player* player) {
     }
 }
 
-// Display the information of the property (name, price, rent, houses, and owner)
+// Display the information of the property 
 void Property::displayPropertyInfo() const {
     cout << "Property: " << name << endl;
     cout << "Price: $" << price << endl;

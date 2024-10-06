@@ -1,3 +1,4 @@
+//kaufmanlinoy@gmail.com / 206971962
 #ifndef UTILITY_HPP
 #define UTILITY_HPP
 
@@ -12,7 +13,7 @@ private:
     Player* owner;       // Owner of the utility
 
 public:
-    // Constructor to initialize the utility with a name and price
+    // Constructor 
     Utility(std::string name, int price);
 
     // Get the name of the utility

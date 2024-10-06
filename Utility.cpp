@@ -1,9 +1,10 @@
+//kaufmanlinoy@gmail.com / 206971962
 #include "Utility.hpp"
 #include <iostream>
 
 using namespace std;
 
-// Constructor to initialize the utility with a name and price
+// Constructor 
 Utility::Utility(string name, int price) 
     : Space(name),  // Call Space constructor
       price(price), 
@@ -42,14 +43,9 @@ int Utility::getRent(int diceRoll, int ownedUtilities) const {
 void Utility::landOn(Player* player) {
     if (owner == nullptr) {
         cout << player->getName() << " landed on " << name << ". It's available for purchase for $" << price << "." << endl;
-        // Logic for purchasing the utility can be added here
+        
     } else if (owner == player) {
         cout << player->getName() << " landed on their own utility." << endl;
-    } else {
-        // int diceRoll = rand() % 6 + 1 + rand() % 6 + 1;  // Simulate rolling two dice
-        // int rent = getRent(diceRoll, owner->getNumberOfUtilities());  // Assume Player class has this method
-        // player->deductMoney(rent);
-        // owner->addMoney(rent);
-        // cout << player->getName() << " rolled a " << diceRoll << " and paid $" << rent << " to " << owner->getName() << " for landing on " << name << "." << endl;
-    }
+  
+}
 }
