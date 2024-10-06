@@ -1,30 +1,45 @@
-# Compiler and flags
+# The name of the final executable
+TARGET = monopoly
+
+# Compiler and compiler flags
 CXX = g++
 CXXFLAGS = -Wall -std=c++11
 
-# Executable name
-EXEC = monopoly
+# Object files
+OBJS = Board.o Player.o Cube.o Property.o Railroad.o Utility.o SpecialSpace.o main.o
 
-# List of all source files
-SRCS = Board.cpp Cube.cpp Game.cpp Player.cpp Property.cpp Railroad.cpp SpecialSpace.cpp Utility.cpp
+# The default target, build the executable
+all: $(TARGET)
 
-# List of object files
-OBJS = $(SRCS:.cpp=.o)
+# Linking the object files to create the executable
+$(TARGET): $(OBJS)
+	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS)
 
-# Default rule to build the executable
-all: $(EXEC)
+# Compile individual source files into object files
+Board.o: Board.cpp Board.hpp
+	$(CXX) $(CXXFLAGS) -c Board.cpp
 
-# Rule to link object files and create the executable
-$(EXEC): $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $(EXEC) $(OBJS)
+Player.o: Player.cpp Player.hpp
+	$(CXX) $(CXXFLAGS) -c Player.cpp
 
-# Rule to compile source files into object files
-%.o: %.cpp
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+Cube.o: Cube.cpp Cube.hpp
+	$(CXX) $(CXXFLAGS) -c Cube.cpp
 
-# Clean up object files and the executable
+Property.o: Property.cpp Property.hpp
+	$(CXX) $(CXXFLAGS) -c Property.cpp
+
+Railroad.o: Railroad.cpp Railroad.hpp
+	$(CXX) $(CXXFLAGS) -c Railroad.cpp
+
+Utility.o: Utility.cpp Utility.hpp
+	$(CXX) $(CXXFLAGS) -c Utility.cpp
+
+SpecialSpace.o: SpecialSpace.cpp SpecialSpace.hpp
+	$(CXX) $(CXXFLAGS) -c SpecialSpace.cpp
+
+main.o: main.cpp
+	$(CXX) $(CXXFLAGS) -c main.cpp
+
+# Clean the build (remove object files and the executable)
 clean:
-	rm -f *.o $(EXEC)
-
-# Phony targets
-.PHONY: all clean
+	rm -f $(OBJS) $(TARGET)
