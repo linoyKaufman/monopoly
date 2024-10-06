@@ -1,5 +1,7 @@
 #include "Property.hpp"
 #include <iostream>
+#include "Player.hpp"
+#include "Space.hpp"
 
 using namespace std;
 
