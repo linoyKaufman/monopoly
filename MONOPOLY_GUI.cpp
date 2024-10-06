@@ -6,7 +6,7 @@
 // Constructor to set up the window and initialize the game
 MONOPOLY_GUI::MONOPOLY_GUI() {
     // Create the window
-    window.create(sf::VideoMode(1000000, 10000), "Monopoly Game");
+    window.create(sf::VideoMode(100000000, 1000000), "Monopoly Game");
 
     // Load the background image
     if (!backgroundTexture.loadFromFile("/home/linoy/Downloads/monopoly-main/Background.jpg")) {

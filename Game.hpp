@@ -10,7 +10,7 @@ class Game {
 private:
     Board gameBoard;                // The board object that holds all the spaces
     std::vector<Player*> players;   // List of players in the game
-    int currentPlayerIndex;         // Index to track which player's turn it is
+    int currentPlayerIndex;         // Index to tell which player's turn it is
     bool gameOver;                  // Flag to check if the game has ended
 
     // Function to handle player actions on their turn
@@ -20,13 +20,13 @@ private:
     bool isGameOver();
 
 public:
-    // Constructor to initialize the game with a set number of players
+    // Constructor 
     Game(int numPlayers);
 
     // Destructor to clean up dynamically allocated memory (players)
     ~Game();
 
-    // Start the game and manage the main game loop
+    // Start the game 
     void start();
 
     // Roll two dice and return the sum

@@ -8,11 +8,11 @@ using namespace std;
 // Constructor 
 SpecialSpace::SpecialSpace(const std::string& name) : Space(name) {}
 
-// Override the landOn method for when a player lands on the special space
+//landOn method for when a player lands on the special space
 void SpecialSpace::landOn(Player* player) {
     cout << player->getName() << " landed on " << name << "." << endl;
 
-    // Define behavior based on the type of special space
+    
     if (name == "Go") {
         cout << player->getName() << " collects $200 for passing Go!" << endl;
         player->addMoney(200);
@@ -34,7 +34,7 @@ void SpecialSpace::landOn(Player* player) {
 
 // Handle the Community Chest space
 void SpecialSpace::handleCommunityChest(Player* player) {
-    // Example: Randomize an event from Community Chest
+    
     int event = rand() % 2;  // Generates a random number between 0 and 1
     if (event == 0) {
         cout << player->getName() << " won $100 from the Community Chest!" << endl;

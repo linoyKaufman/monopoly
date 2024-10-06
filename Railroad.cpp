@@ -46,7 +46,7 @@ Player* Railroad::getOwner() const {
 void Railroad::landOn(Player* player) {
     if (owner == nullptr) {
         cout << player->getName() << " landed on " << name << ". It's available for purchase for $" << price << "." << endl;
-        // Add logic to offer the player the option to buy the railroad
+        
     } else if (owner == player) {
         cout << player->getName() << " landed on their own railroad." << endl;
     } 
