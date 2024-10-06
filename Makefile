@@ -42,4 +42,4 @@ main.o: main.cpp
 
 # Clean the build (remove object files and the executable)
 clean:
-	rm -f $(OBJS) $(TARGET)
+	rm -f $(OBJS) $(TARGET) *.o
