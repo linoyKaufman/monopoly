@@ -1,5 +1,6 @@
-monopoly
+monopoly project.//
+
 Run the Project:
-./monopoly
+./monopoly ///
 Run the test:
 ./test_game
