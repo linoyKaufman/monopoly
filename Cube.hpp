@@ -1,5 +1,4 @@
-#ifndef CUBE_HPP
-#define CUBE_HPP
+//kaufmanlinoy@gmail.com / 206971962
 
 class Cube {
 private:
@@ -16,8 +15,8 @@ public:
     // Roll a single six-sided die
     int rollSingle();
 
-    // Check if the last roll was a double (both dice have the same value)
+    // Check if the last roll was a double
     bool isDouble() const;
 };
 
-#endif  // CUBE_HPP
+

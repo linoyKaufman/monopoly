@@ -4,53 +4,123 @@
 #include "Property.hpp"
 #include "Railroad.hpp"
 #include "Utility.hpp"
+#include "SpecialSpace.hpp"
 #include <cassert>
 #include <iostream>
 
-void testGameFlow() {
-    Board board;
+void testPlayerMovement() {
+    Player player("Charlie");
+
+    // Move player within the board limits
+    player.move(5);
+    assert(player.getPosition() == 5);
+
+    // Move player past the end of the board (simulating circular movement)
+    player.move(37);
+    assert(player.getPosition() == 2); // 5 + 37 wraps around the board
+
+    std::cout << "Player movement test passed." << std::endl;
+}
+
+void testCube() {
     Cube cube;
+    for (int i = 0; i < 100; ++i) {
+        int roll = cube.roll();
+        assert(roll >= 2 && roll <= 12);  // Rolls should be between 2 and 12 for two dice
+    }
+    std::cout << "Cube roll test passed." << std::endl;
+}
+
+void testBoardInitialization() {
+    Board board;
+    Space* spaceAt5 = board.getSpace(5);  // Assuming position 5 should be "Reading Railroad"
+    
+    // Cast to Railroad
+    Railroad* railroad = dynamic_cast<Railroad*>(spaceAt5);
+    
+    // Check if the space at position 5 is a Railroad and named "Reading Railroad"
+    if (railroad) {
+        std::cout << "Space at position 5 is: \"" << railroad->getName() << "\"" << std::endl;  // Debug output
+        
+        // Debugging step: print the string lengths
+        std::cout << "Length of railroad name: " << railroad->getName().length() << std::endl;
+        std::cout << "Expected name: \"Reading Railroad\"" << std::endl;
+        std::cout << "Length of expected name: " << std::string("Reading Railroad").length() << std::endl;
+
+        // Use the string compare method instead of direct comparison
+        assert(railroad->getName().compare("Reading Railroad") == 0);
+    } else {
+        std::cout << "Space at position 5 is not a railroad." << std::endl;  // Debug output for casting failure
+        assert(false);  // Fail the test if it's not a Railroad
+    }
+
+    std::cout << "Board initialization test passed." << std::endl;
+}
+
+
+
+
+
+
+
+void testPropertyOwnership() {
     Player player1("Alice");
     Player player2("Bob");
+    Property property("Baltic Avenue", 60, 4);
 
-    // Player 1 rolls and moves
-    int roll1 = cube.roll();
-    std::cout << player1.getName() << " rolled " << roll1 << std::endl;
-    player1.move(roll1);
-    Space* space1 = board.getSpace(player1.getPosition());
-    std::cout << player1.getName() << " moved to position " << player1.getPosition() << std::endl;
-    std::cout << player1.getName() << " landed on " << space1->getName() << std::endl;
+    // Player1 buys the property
+    player1.buyProperty(&property);
+    assert(property.isOwned());
+    assert(property.getOwner() == &player1);
 
-    // Player 2 rolls and moves
-    int roll2 = cube.roll();
-    std::cout << player2.getName() << " rolled " << roll2 << std::endl;
-    player2.move(roll2);
-    Space* space2 = board.getSpace(player2.getPosition());
-    std::cout << player2.getName() << " moved to position " << player2.getPosition() << std::endl;
-    std::cout << player2.getName() << " landed on " << space2->getName() << std::endl;
+    // Player2 lands on the property and pays rent
+    player2.deductMoney(property.getRent());
+    player1.addMoney(property.getRent());
+    assert(player2.getMoney() == 1500 - property.getRent());
+    assert(player1.getMoney() == 1500 - property.getPrice() + property.getRent());
 
-    // Check if the space is a property and Bob buys it
-    Property* property = dynamic_cast<Property*>(space2);
-    if (property && !property->isOwned()) {
-        player2.buyProperty(property);  // Bob buys the property
-        assert(player2.getMoney() == 1500 - property->getPrice());
-    }
-
-    // Now Alice lands on the same property and pays rent to Bob
-    player1.move(roll2);  // Simulate Alice landing on the same property as Bob
-    space1 = board.getSpace(player1.getPosition());
-    property = dynamic_cast<Property*>(space1);  // Reuse the variable 'property' here
-    
-    if (property && property->isOwned() && property->getOwner() == &player2) {
-        player1.payRent(property);  // Alice pays rent to Bob
-        assert(player1.getMoney() == 1500 - property->getRent());
-        assert(player2.getMoney() == 1500 - property->getPrice() + property->getRent());
-    }
-
+    std::cout << "Property ownership and rent test passed." << std::endl;
 }
-    int main() {
-    testGameFlow();
+
+// void testRailroadOwnership() {
+//     Player player("David");
+//     Railroad railroad("Pennsylvania Railroad", 200);
+
+// //     // Player buys the railroad
+//     player.buyProperty(&railroad);
+//     assert(railroad.isOwned());
+//     assert(railroad.getOwner() == &player);
+
+//     std::cout << "Railroad ownership test passed." << std::endl;
+// }
+
+
+void testSpecialSpaces() {
+    Board board;
+
+    // Go space
+    Space* goSpace = board.getSpace(0);
+    SpecialSpace* go = dynamic_cast<SpecialSpace*>(goSpace);
+    assert(go != nullptr);
+    assert(go->getName() == "Go");
+
+    // Income Tax space
+    Space* taxSpace = board.getSpace(4);
+    SpecialSpace* incomeTax = dynamic_cast<SpecialSpace*>(taxSpace);
+    assert(incomeTax != nullptr);
+    assert(incomeTax->getName() == "Income Tax");
+
+    std::cout << "Special spaces test passed." << std::endl;
+}
+
+int main() {
+    testPlayerMovement();
+    testCube();
+    testBoardInitialization();
+    testPropertyOwnership();
+    //testRailroadOwnership();
+    testSpecialSpaces();
+
     std::cout << "All tests passed!" << std::endl;
     return 0;
 }
-

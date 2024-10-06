@@ -7,7 +7,6 @@
 
 class Railroad : public Space {
 private:
-    std::string name;       // Name of the railroad
     int price;              // Purchase price of the railroad
     int baseRent;           // Base rent for one owned railroad
     Player* owner;          // Pointer to the player who owns the railroad
@@ -17,7 +16,8 @@ public:
     Railroad(std::string name, int price);
 
     // Getter functions
-    std::string getName() const;
+    std::string getName() const;  // Inherited from Space
+    
     int getPrice() const;
 
     // Calculate rent based on how many railroads the owner has
@@ -30,7 +30,7 @@ public:
     Player* getOwner() const;
 
     // What happens when a player lands on this railroad
-    void landOn(Player* player) override;
+    void landOn(Player* player) override;  // Ensure override keyword is used
 };
 
 #endif  // RAILROAD_HPP

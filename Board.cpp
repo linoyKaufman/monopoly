@@ -1,3 +1,4 @@
+//kaufmanlinoy@gmail.com / 206971962
 #include "Board.hpp"
 #include "Property.hpp"
 #include "Railroad.hpp"
@@ -11,15 +12,15 @@ Board::Board() {
 
 // Destructor
 Board::~Board() {
-    // Clean up all dynamically allocated spaces
+    
     for (Space* space : spaces) {
         delete space;
     }
 }
 
-// Initialize the board with the 40 spaces in the standard Monopoly layout
+// Initialize the board 
 void Board::initializeBoard() {
-    // Initialize the board with all the predefined spaces
+    
     spaces.push_back(new SpecialSpace("Go"));  // 0: Go
     spaces.push_back(new Property("Mediterranean Avenue", 60, 2));  // 1: Property
     spaces.push_back(new SpecialSpace("Community Chest"));  // 2: Community Chest
@@ -79,7 +80,7 @@ void Board::displayBoard() const {
     }
 }
 
-// Handle when a player lands on a space
+//when a player lands on a space
 void Board::landOnSpace(Player* player) {
     int position = player->getPosition();
     Space* space = getSpace(position);
