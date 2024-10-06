@@ -64,16 +64,17 @@ void Board::initializeBoard() {
 
 // Get the space at a specific position
 Space* Board::getSpace(int position) const {
-    if (position >= 0 && position < spaces.size()) {
+    if (position >= 0 && static_cast<size_t>(position) < spaces.size()) {
         return spaces[position];
     }
     return nullptr;
 }
 
+
 // Print the current state of the board, showing the name of each space
 void Board::displayBoard() const {
     cout << "Board Layout:" << endl;
-    for (int i = 0; i < spaces.size(); i++) {
+    for (size_t i = 0; i < spaces.size(); i++) {
         cout << "Position " << i << ": " << spaces[i]->getName() << endl;
     }
 }

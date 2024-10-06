@@ -1,18 +1,23 @@
-// Cube.hpp
-
+#ifndef CUBE_HPP
+#define CUBE_HPP
 
 class Cube {
+private:
+    int die1;  // First die
+    int die2;  // Second die
+
 public:
-    // Rolls two six-sided dice and returns the total
+    // Constructor
+    Cube();
+
+    // Roll two six-sided dice and return the total
     int roll();
-    
-    // Rolls a single die and returns the result
+
+    // Roll a single six-sided die
     int rollSingle();
 
-    // Checks if the last roll was a double (both dice rolled the same number)
+    // Check if the last roll was a double (both dice have the same value)
     bool isDouble() const;
-
-private:
-    int die1;  // First die value
-    int die2;  // Second die value
 };
+
+#endif  // CUBE_HPP
